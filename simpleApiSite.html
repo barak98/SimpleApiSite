@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>XML http request</title>
+    <script>
+      let data;
+      let isLoded= false;
+      async function getUsers() {
+        let response = await fetch(
+          "https://jsonplaceholder.typicode.com/users"
+        );
+         data = await response.json();
+        return data;
+      }
+      getUsers().then(data => console.log(data));
+
+      function uusersInfo(){
+        if(!isLoded){
+        isLoded = true
+        let usersString =JSON.stringify(data);
+        document.getElementById("Users").innerHTML = usersString;
+        }
+        else{
+          isLoded=false;
+          document.getElementById("Users").innerHTML ="";
+        }
+
+      }
+    </script>
+  </head>
+
+  <body>
+    <button onclick="uusersInfo()">click me</button>
+    <p id="Users"></p>
+  </body>
+</html>
